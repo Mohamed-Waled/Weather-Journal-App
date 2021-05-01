@@ -2,8 +2,7 @@
 
 const button = document.querySelector('#generate');
 let URL = `http://api.openweathermap.org/data/2.5/forecast?zip=`; //the full url of the site that i will req the weather from it 
-let apiKey = `&appid=04be82acf27e35069e07d534c40e4f07`; // the api code
-
+const apiKey = `&appid=04be82acf27e35069e07d534c40e4f07&units=imperial`; // the api code
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -43,13 +42,12 @@ async function postData(url = "", data = {}) {
     };
 };
 
-async function updateUI() {
+async function updateUI(date, temp, content) {
     const request = await fetch("/get");
     try {
-        const allData = await request.json();
-        document.getElementById("date").innerHTML = `Date: ${allData[0].date}`;
-        document.getElementById("temp").innerHTML = `Temperatuer: ${allData[0].temp}`;
-        document.getElementById("content").innerHTML = `I Feel: ${allData[0].content}`;
+        document.getElementById("date").innerHTML = `Date: ${newDate}`;
+        document.getElementById("temp").innerHTML = `Temperatuer: ${temp}`;
+        document.getElementById("content").innerHTML = `I Feel: ${feelings.value}`;
     } catch (error) {
         console.log("ERROR!!", error); // To Show The Error To Us In The Console
     };
@@ -71,5 +69,5 @@ async function getWeather(URL, zipCode, apiKey) {
 function Data(data) {
     console.log(data); // To Add Data To The Post Req
     postData("/post", { date: newDate, temp: data.list[0].main.temp, content: feelings.value })
-    updateUI();
+    updateUI(date, temp, content);
 };

@@ -1,6 +1,6 @@
 // Setup empty JS object to act as endpoint for all routes
 
-projectData = [];
+projectData = {};
 const port = 4444; // Declare a var to save the port inside it 
 
 // Require Express to run server and routes
@@ -48,8 +48,6 @@ function listening() {
 
 function getReqWeather(req, res) {
     res.send(projectData);
-    projectData = [];
-
 };
 
 function postReqWeather(req, res) {
@@ -59,5 +57,5 @@ function postReqWeather(req, res) {
         temp: req.body.temp,
         content: req.body.content
     };
-    projectData.push(newData);
+    projectData[newData] = newData;
 };
