@@ -19,7 +19,15 @@ function getWeatherData(press) {
     const feelings = document.querySelector("#feelings").Value; //selectting the value of the HTML element with the id "feelings"
     getWeather(URL, zipCode, apiKey)
 
-    .then(Data);
+    .then(function(data) {
+        console.log(data); // To Add Data To The Post Req
+        postData("/post", {
+                date: newDate,
+                temp: data.list[0].main.temp,
+                content: feelings
+            })
+            .then(updateUI());
+    });
 };
 
 async function postData(url = "", data = {}) {
@@ -42,11 +50,13 @@ async function postData(url = "", data = {}) {
     };
 };
 
-async function updateUI(date, temp, content) {
+async function updateUI() {
     const request = await fetch("/get");
     try {
-        document.getElementById("date").innerHTML = `Date: ${newDate}`;
-        document.getElementById("temp").innerHTML = `Temperatuer: ${temp}`;
+        res = await request.json();
+        console.log(res);
+        document.getElementById("date").innerHTML = `Date: ${res.date}`;
+        document.getElementById("temp").innerHTML = `Temperatuer: ${res.temp}`;
         document.getElementById("content").innerHTML = `I Feel: ${feelings.value}`;
     } catch (error) {
         console.log("ERROR!!", error); // To Show The Error To Us In The Console
@@ -64,10 +74,4 @@ async function getWeather(URL, zipCode, apiKey) {
     } catch (error) {
         console.log("ERROR!!", error); // To Show The Error To Us In The Console
     };
-};
-
-function Data(data) {
-    console.log(data); // To Add Data To The Post Req
-    postData("/post", { date: newDate, temp: data.list[0].main.temp, content: feelings.value })
-    updateUI(date, temp, content);
 };
