@@ -57,5 +57,5 @@ function postReqWeather(req, res) {
         temp: req.body.temp,
         content: req.body.content
     };
-    projectData[newData] = newData;
+    projectData = newData;
 };
