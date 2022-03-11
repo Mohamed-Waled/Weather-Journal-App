@@ -8,7 +8,7 @@ This is a solution to Project 2 from Front End Web Development Professional Nano
   - [Screenshot](#screenshot)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [What The Weather Journal App Contains](#what-the-weather-journal-app-contains)
+  - [What The Weather Journal App Contains](#what-the-weather-journal-app-contains-)
 - [Author](#author)
 
 ## Overview
